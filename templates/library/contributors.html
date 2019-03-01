@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h3>Contributors</h3>
+  {% if contributor_list %}
+  <ul>
+    {% for contributor in contributor_list %}
+      <li>
+	      <a href="{{ contributor.get_absolute_url }}">{{ contributor.username }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>No Contributors.</p>
+  {% endif %}       
+{% endblock %}
+

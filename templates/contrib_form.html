@@ -1,0 +1,17 @@
+<div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">Contribute</button>
+  <div id="myDropdown" class="dropdown-content">
+  <form action="/userprofile/" method="post">
+    {% csrf_token %}
+    <ul>
+     <li><strong>Name: </strong></br>{{ contribution_form.name }}</li>
+     <li><strong>Location: </strong></br>{{ contribution_form.location }}</li>
+     <li><strong>Category: </strong></br>{{ contribution_form.category }}</li>
+     <li><strong>Text: </strong></br>{{ contribution_form.text }}</li>
+     <li><strong>Description: </strong></br>{{ contribution_form.description }}</li>
+    </ul>
+    <input type="submit" value="Submit">
+  </form>
+  </div>
+</div>
+

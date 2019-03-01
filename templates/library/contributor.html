@@ -1,0 +1,11 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h3>{{ contributor.username }}</h3>
+  <p><strong>Contributions:</strong> {{ contributor.number_contributions }}</p>
+  <ul>
+    {% for item in contributor.contributions %}
+      <li>{{ item }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

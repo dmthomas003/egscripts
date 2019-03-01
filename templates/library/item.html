@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h3>{{ item.name }}</h3>
+  <p><strong>Added: </strong> {{ item.created | date:"M d, Y" }}</p>
+  <p><strong>Updated: </strong> {{ item.updated | date:"M d, Y" }}</p>
+  <p class="code-block" id="itemText">{{ item.text }}</p>
+  <!-- <textarea rows="3" cols="30" id="itemText">{{ item.text }}</textarea> -->
+  <button onclick="copyToClipboard('#itemText')">Copy</button>
+  <p><strong>Description:</strong> {{ item.description }}</p>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+  function copyToClipboard(element) {
+    var $temp = $("<textarea>");
+    $("body").append($temp);
+    $temp.val($(element).text()).select();
+    document.execCommand("copy");
+    $temp.remove();
+  }
+</script>
+
+{% endblock %}

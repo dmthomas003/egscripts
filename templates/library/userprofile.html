@@ -1,0 +1,52 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+{% if perms.library.can_add_item %}
+{% if contributions %}
+  <p><strong>Contributions: </strong>  {{ total_contributions }}</p>
+  <ul>
+  {% for item in contributions.all %}
+  <li><a href="{% url 'item-detail' pk=item.id %}">{{ item.name }}</a></li>
+  {% endfor %}
+  </ul>
+{% endif %}
+{% if pending_contributions %}
+  <p><strong>Pending Contributions: </strong> {{ pending_count }}</p>
+  <ul>
+    {% for item in pending_contributions.all %}
+    <li><a href="{% url 'item-detail' pk=item.id %}">{{ item.name }}</a></li>
+    {% endfor %}
+  </ul>
+{% endif %}
+{% endif %}
+  </br>
+  {% include 'contrib_form.html' %}
+{% endif %}
+
+<script>
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+</script>
+
+{% endblock %}
+
+<!--
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+-->
