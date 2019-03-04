@@ -29,9 +29,9 @@ class Category(models.Model):
 ## still need to add additional fields (run as, kbas, etc.)
 class Item(models.Model):
 
-    USER = 'USER'
-    IMHUSER = 'IMHUSER'
-    ROOT = 'ROOT'
+    USER = 'User'
+    IMHUSER = 'IMH-User'
+    ROOT = 'Root'
     T1A = 'T1A'
     T1E = 'T1E'
 
@@ -52,7 +52,7 @@ class Item(models.Model):
     text = models.TextField(blank=False, null=False)
     description = models.TextField(blank=False, null=False)
     location = models.CharField(max_length=100, blank=True, null=True)
-    run_as = models.CharField(max_length=35, default=USER, choices=RUN_AS)
+    run_as = models.CharField(max_length=35, default=IMHUSER, choices=RUN_AS)
     reviewed = models.BooleanField(default=False)
     #date reviewed = models.DateField(...)
 

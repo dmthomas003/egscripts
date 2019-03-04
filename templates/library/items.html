@@ -1,7 +1,7 @@
 {% extends 'base_list.html' %}
 
 {% block content %}
-{% block list_title %}Scripts{% endblock %}
+{% block list_title %}<h4>Scripts</h4>{% endblock %}
 {% block list %}
   {% regroup item_list by category as category_list %}
   <ul>
@@ -9,7 +9,13 @@
     <li>{{ category.grouper }}
     <ul>
       {% for item in category.list %}
-      {% if item.reviewed %}<li><a href="{% url 'item-detail' pk=item.id %}">{{ item }}</a></li>{% endif %}
+      {% if item.reviewed %}
+      <li>
+	      <a href="{% url 'item-detail' pk=item.id %}"><strong>{{ item }}</strong></a></br>
+	      <p class="code-block">{{ item.text }}</p>
+              <button onclick="copyToClipboard('#itemText')">Copy</button>
+      </li>
+      {% endif %}
 
       {% endfor %}
     </ul>
@@ -18,3 +24,15 @@
   </ul>
 {% endblock %}
 {% endblock %}
+  <p><strong>Description:</strong> {{ item.description }}</p>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+  function copyToClipboard(element) {
+    var $temp = $("<textarea>");
+    $("body").append($temp);
+    $temp.val($(element).text()).select();
+    document.execCommand("copy");
+    $temp.remove();
+  }
+</script>
+
