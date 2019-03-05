@@ -12,8 +12,8 @@
       {% if item.reviewed %}
       <li>
 	      <a href="{% url 'item-detail' pk=item.id %}"><strong>{{ item }}</strong></a></br>
-	      <p class="code-block">{{ item.text }}</p>
-              <button onclick="copyToClipboard('#itemText')">Copy</button>
+	      <p class="code-block" id="{{ item.pk }}">{{ item.text }}</p>
+	      <button onclick="copyToClipboard('#{{ item.pk }}')">copy</button>
       </li>
       {% endif %}
 
@@ -22,9 +22,6 @@
     </li>
   {% endfor %}
   </ul>
-{% endblock %}
-{% endblock %}
-  <p><strong>Description:</strong> {{ item.description }}</p>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>
   function copyToClipboard(element) {
@@ -35,4 +32,5 @@
     $temp.remove();
   }
 </script>
-
+{% endblock %}
+{% endblock %}
