@@ -4,24 +4,52 @@
 {% if user.is_authenticated %}
 {% if perms.library.can_add_item %}
 {% if contributions %}
+<div class="useritem-lists">
+  <div  class="contrib-list">
   <p><strong>Contributions: </strong>  {{ total_contributions }}</p>
   <ul>
   {% for item in contributions.all %}
-  <li><a href="{% url 'item-detail' pk=item.id %}">{{ item.name }}</a></li>
+      <li>
+       <a href="{% url 'item-detail' pk=item.id %}"><strong>{{ item }}</strong></a></br>
+       <p class="code-block" id="{{ item.pk }}">{{ item.text }}</p>
+       <button onclick="copyToClipboard('#{{ item.pk }}')">copy</button>
+      </li>
   {% endfor %}
   </ul>
+  </div>
 {% endif %}
+{% endif %}
+<div  class="user-list">
+{% if saved_items %}
+	<p><strong>Saved: </strong> {{ saved_count }}</p>
+<ul>
+  {% for item in saved_items.all %}
+        <li>
+       <a href="{% url 'item-detail' pk=item.id %}"><strong>{{ item }}</strong></a></br>
+       <p class="code-block" id="{{ item.pk }}">{{ item.text }}</p>
+       <button onclick="copyToClipboard('#{{ item.pk }}')">copy</button>
+      </li>
+  {% endfor %}
+{% endif %}
+</ul>
+</div>
+</div>
+<div class="pending">
 {% if pending_contributions %}
+<div class="pending-list">
   <p><strong>Pending Contributions: </strong> {{ pending_count }}</p>
   <ul>
     {% for item in pending_contributions.all %}
-    <li><a href="{% url 'item-detail' pk=item.id %}">{{ item.name }}</a></li>
+        <li>
+       <a href="{% url 'item-detail' pk=item.id %}"><strong>{{ item }}</strong></a></br>
+       <p class="code-block" id="{{ item.pk }}">{{ item.text }}</p>
+       <button onclick="copyToClipboard('#{{ item.pk }}')">copy</button>
+      </li>
     {% endfor %}
   </ul>
 {% endif %}
-{% endif %}
-  </br>
-  {% include 'contrib_form.html' %}
+</div>
+</div>
 {% endif %}
 
 <script>
@@ -32,6 +60,17 @@ function myFunction() {
 }
 
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+  function copyToClipboard(element) {
+    var $temp = $("<textarea>");
+    $("body").append($temp);
+    $temp.val($(element).text()).select();
+    document.execCommand("copy");
+    $temp.remove();
+  }
+</script>
+
 
 {% endblock %}
 

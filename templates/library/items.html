@@ -6,7 +6,7 @@
   {% regroup item_list by category as category_list %}
   <ul>
   {% for category in category_list %}
-    <li>{{ category.grouper }}
+  <li><h5>{{ category.grouper }}</h5>
     <ul>
       {% for item in category.list %}
       {% if item.reviewed %}

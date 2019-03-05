@@ -69,10 +69,12 @@ def userprofile(request):
         profile = UserProfile.objects.get(user=request.user)
     #join_date = request.user.date_joined
     #last_login = request.user.last_login
-    contributions = Item.objects.filter(reviewed=True).filter(contributor=request.user)
+    contributions = Item.objects.filter(reviewed=True).filter(contributor=profile.user)
     total_contributions = contributions.count()
-    pending_contributions = Item.objects.filter(reviewed=False).filter(contributor=request.user)
+    pending_contributions = Item.objects.filter(reviewed=False).filter(contributor=profile.user)
     pending_count = pending_contributions.count()
+    saved_items = profile.saved
+    saved_count = saved_items.count()
 
     ## form to contribute new item
     ## is added to pending list until reviewed by admin 
@@ -97,6 +99,8 @@ def userprofile(request):
             'pending_contributions': pending_contributions,
             'pending_count': pending_count,
             'contribution_form': contribution_form,
+            'saved_items': saved_items,
+            'saved_count': saved_count,
             #'join_date': join_date,
             #'last_login': last_login,
             }

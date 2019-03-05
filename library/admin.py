@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from library.models import Item, Category
+from library.models import Item, Category, UserProfile
 from django.contrib import admin
 
 # Register your models here.
@@ -18,6 +18,10 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name']
 
 
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ['user', 'is_t1e']
+
+
 admin.site.register(Item, ItemAdmin)
 admin.site.register(Category, CategoryAdmin)
-#need to set custom name for categories field, currently "categorys"
+admin.site.register(UserProfile, UserProfileAdmin)
