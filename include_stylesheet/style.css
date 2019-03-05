@@ -35,13 +35,19 @@ strong {
     #bec6cc;
 }
 
+p {
+    white-space: pre-line;
+    width: 560px;
+}
 p.code-block {
-    background-color: #333333;
-    color: #fff;
+    font-family: "Courier 10 Pitch", Courier, monospace; 
+    white-space: pre-line;
+    background-color: #152837;
+    color: #cdcdbf;
     font-size: 12pt;
-    font-family: "Consolas";
     display: inline-block;
-    min-width: 160px;
+    width: 560px;
+    padding: 5px 10px 7px 10px;
 }
 
 .dropdown {
