@@ -123,11 +123,11 @@ class CategoryDetailView(LoginRequiredMixin, generic.DetailView):
     slug_field = 'name'
 
 
-class LanguageListView(generic.ListView):
+class LanguageListView(LoginRequiredMixin, generic.ListView):
     template_name = 'library/languages.html'
     model = ItemLanguage
 
 
-class TypeListView(generic.ListView):
+class TypeListView(LoginRequiredMixin, generic.ListView):
     template_name = 'library/types.html'
     model = ItemType
