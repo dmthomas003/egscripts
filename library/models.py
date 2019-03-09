@@ -73,7 +73,7 @@ class Item(models.Model):
     contributor = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    category = models.ForeignKey('Category', default='Misc')
+    category = models.ForeignKey('Category', blank=True, null=True)
     subcategory = models.ManyToManyField('Category', related_name='subcategory', blank=True, default=category)
     item_type = models.ForeignKey('ItemType', blank=True, null=True)
     language = models.ForeignKey('ItemLanguage', blank=True, null=True)
@@ -111,7 +111,7 @@ class KBA(models.Model):
     """
 
     url = models.CharField(max_length=250)
-    category = models.ForeignKey('Category', default='Misc')
+    category = models.ForeignKey('Category', blank=True, null=True)
     title = models.CharField(max_length=100)
     reviewed = models.BooleanField(default=False)
     related_item = models.ManyToManyField('Item')
