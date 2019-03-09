@@ -1,5 +1,5 @@
 from django import forms
-from library.models import Item, Category
+from library.models import Item, Category, UserProfile
 
 
 ## basic form to add item
@@ -15,3 +15,9 @@ class ContributionForm(forms.ModelForm):
             'description': forms.Textarea(attrs={'rows':4, 'cols':40})
             }
 
+
+class SavedForm(forms.ModelForm):
+
+    class Meta:
+        model = UserProfile
+        fields = ['saved']

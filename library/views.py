@@ -4,8 +4,8 @@ from django.views import generic
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from library.models import Item, Category, UserProfile
-from library.forms import ContributionForm
+from library.models import Item, Category, UserProfile, ItemLanguage, ItemType
+from library.forms import ContributionForm, SavedForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User, Group
@@ -53,10 +53,6 @@ def userprofile(request):
     contributor group and a list of pending and reviewed
     items
 
-    need to add saved list
-
-    need to remove redundancies in context objects and template
-
     """
 
     username = request.user.get_username()
@@ -70,6 +66,7 @@ def userprofile(request):
     #join_date = request.user.date_joined
     #last_login = request.user.last_login
     contributions = Item.objects.filter(reviewed=True).filter(contributor=profile.user)
+    new_contrib = Item.objects.filter(reviewed=True).filter(contributor=profile.user).order_by('-created')[:10]
     total_contributions = contributions.count()
     pending_contributions = Item.objects.filter(reviewed=False).filter(contributor=profile.user)
     pending_count = pending_contributions.count()
@@ -92,8 +89,10 @@ def userprofile(request):
             return HttpResponseRedirect(reverse('userprofile-detail'))
     else:
         contribution_form = ContributionForm()
+    
     context = {
             'username': username,
+            'new_contrib': new_contrib,
             'contributions': contributions,
             'total_contributions': total_contributions,
             'pending_contributions': pending_contributions,
@@ -108,17 +107,6 @@ def userprofile(request):
     return render(request, 'library/userprofile.html', context=context)
 
 
-class CategoryListView(LoginRequiredMixin, generic.ListView):
-    template_name = 'library/categories.html'
-    model = Category
-
-
-class CategoryDetailView(LoginRequiredMixin, generic.DetailView):
-    template_name = 'library/category.html'
-    model = Category
-    slug_field = 'name'
-
-
 class ItemListView(LoginRequiredMixin, generic.ListView):
     template_name = 'library/items.html'
     model = Item
@@ -129,14 +117,17 @@ class ItemDetailView(LoginRequiredMixin, generic.DetailView):
     model = Item
 
 
-"""
-class ContributorListView(LoginRequiredMixin, generic.ListView):
-    template_name = 'library/contributors.html'
-    model = Contributor
+class CategoryDetailView(LoginRequiredMixin, generic.DetailView):
+    template_name = 'library/category.html'
+    model = Category
+    slug_field = 'name'
 
 
-class ContributorDetailView(LoginRequiredMixin, generic.DetailView):
-    template_name = 'library/contributor.html'
-    model = Contributor
-    slug_field = 'username'
-"""
+class LanguageListView(generic.ListView):
+    template_name = 'library/languages.html'
+    model = ItemLanguage
+
+
+class TypeListView(generic.ListView):
+    template_name = 'library/types.html'
+    model = ItemType

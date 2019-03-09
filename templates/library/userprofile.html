@@ -6,9 +6,9 @@
 {% if contributions %}
 <div class="useritem-lists">
   <div  class="contrib-list">
-  <p><strong>Contributions: </strong>  {{ total_contributions }}</p>
+  <p><strong>Total Contributions: </strong>  {{ total_contributions }}</p>
   <ul>
-  {% for item in contributions.all %}
+  {% for item in new_contrib.all %}
       <li>
        <a href="{% url 'item-detail' pk=item.id %}"><strong>{{ item }}</strong></a></br>
        <p class="code-block" id="{{ item.pk }}">{{ item.text }}</p>

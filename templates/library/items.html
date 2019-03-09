@@ -1,7 +1,7 @@
 {% extends 'base_list.html' %}
 
 {% block content %}
-{% block list_title %}<h4>Scripts</h4>{% endblock %}
+{% block list_title %}<h4>By Category</h4>{% endblock %}
 {% block list %}
   {% regroup item_list by category as category_list %}
   <ul>

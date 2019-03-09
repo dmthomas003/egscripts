@@ -9,9 +9,31 @@ from django.utils import timezone
 import uuid 
 
 
+class ItemType(models.Model):
+
+    name = models.CharField(max_length=35)
+
+    def get_absolute_url(self):
+        return reverse('type-detail', args=[str(self.name)])
+
+    def __str__(self):
+        return self.name
+
+
+class ItemLanguage(models.Model):
+
+    name = models.CharField(max_length=35)
+
+    def get_absolute_url(self):
+        return reverse('language-detail', args=[str(self.name)])
+
+    def __str__(self):
+        return self.name
+
+
 class Category(models.Model):
 
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=35)
     
     def get_absolute_url(self):
         return reverse('category-detail', args=[str(self.name)])
@@ -23,11 +45,15 @@ class Category(models.Model):
         verbose_name_plural = 'Categories'
 
 
-## central model of library
-## seperate model for category makes it easier to extend
-## contributor is automatically populated when submitted by form
-## still need to add additional fields (run as, kbas, etc.)
 class Item(models.Model):
+
+    """
+
+    basic model for scripts, commands, etc in library
+    type, category, and language models 
+    contributor is automatically populated when submitted by form
+
+    """
 
     USER = 'User'
     IMHUSER = 'IMH-User'
@@ -49,12 +75,13 @@ class Item(models.Model):
     updated = models.DateTimeField(auto_now=True)
     category = models.ForeignKey('Category', default='Misc')
     subcategory = models.ManyToManyField('Category', related_name='subcategory', blank=True, default=category)
+    item_type = models.ForeignKey('ItemType', blank=True, null=True)
+    language = models.ForeignKey('ItemLanguage', blank=True, null=True)
     text = models.TextField(blank=False, null=False)
     description = models.TextField(blank=False, null=False)
     location = models.CharField(max_length=100, blank=True, null=True)
     run_as = models.CharField(max_length=35, default=IMHUSER, choices=RUN_AS)
     reviewed = models.BooleanField(default=False)
-    #date reviewed = models.DateField(...)
 
     def get_absolute_url(self):
         return reverse('item-detail', args=[str(self.id)])
@@ -73,16 +100,21 @@ class UserProfile(models.Model):
         return self.user.get_username()
 
 
-## model for kbas related to script and command items
-## would just be links to outside articles
-## eventually maybe create seperate article model for internal kbas
 class KBA(models.Model):
     
+    """
+
+    model for kbas related to script and command items
+    would just be links to outside articles
+    eventually maybe create seperate article model for internal kbas
+
+    """
+
     url = models.CharField(max_length=250)
     category = models.ForeignKey('Category', default='Misc')
     title = models.CharField(max_length=100)
     reviewed = models.BooleanField(default=False)
-    related_item = models.ForeignKey('Item', null=True)
+    related_item = models.ManyToManyField('Item')
     author = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
