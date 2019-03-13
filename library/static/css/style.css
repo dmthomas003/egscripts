@@ -39,6 +39,7 @@ p {
     white-space: pre-line;
     width: 560px;
 }
+
 p.code-block {
     font-family: "Courier 10 Pitch", Courier, monospace; 
     white-space: pre-line;
@@ -46,7 +47,7 @@ p.code-block {
     color: #cdcdbf;
     font-size: 12pt;
     display: inline-block;
-    width: 560px;
+    width: 530px;
     padding: 5px 10px 7px 10px;
 }
 
@@ -68,7 +69,6 @@ p.code-block {
     text-decoration: none;
     display: block;
 }
-
 
 .show {display: block;}
 

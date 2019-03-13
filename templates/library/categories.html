@@ -6,9 +6,31 @@
   <ul>
     {% for category in category_list %}
       <li>
-	      <a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
+	      <h5><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></h5>
+	      <ul>
+	        {% for item in category.item_set.all %}
+		{% if item.reviewed %}
+      <li>
+       <a href="{% url 'item-detail' pk=item.id %}"><strong>{{ item }}</strong></a></br>
+       <p class="code-block" id="{{ item.pk }}">{{ item.text }}</p>
+       <button onclick="copyToClipboard('#{{ item.pk }}')">copy</button>
+      </li>
+      {% endif %}
+      {% endfor %}
+      </ul>
       </li>
     {% endfor %}
   </ul>
   {% endif %}       
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+  function copyToClipboard(element) {
+    var $temp = $("<textarea>");
+    $("body").append($temp);
+    $temp.val($(element).text()).select();
+    document.execCommand("copy");
+    $temp.remove();
+  }
+</script>
+
 {% endblock %}

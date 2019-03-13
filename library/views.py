@@ -117,6 +117,11 @@ class ItemDetailView(LoginRequiredMixin, generic.DetailView):
     model = Item
 
 
+class CategoryListView(LoginRequiredMixin, generic.ListView):
+    template_name = 'library/categories.html'
+    model = Category
+
+
 class CategoryDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = 'library/category.html'
     model = Category
