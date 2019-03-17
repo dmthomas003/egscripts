@@ -10,6 +10,9 @@
   <p class="code-block" id="itemText">{{ item.text }}</p>
   <!-- <textarea rows="3" cols="30" id="itemText">{{ item.text }}</textarea> -->
   <button onclick="copyToClipboard('#itemText')">Copy</button>
+  {% if item not in user.userprofile.saved.all %}
+  <button>Save</button>
+  {% endif %}
   <p class="item-description" ><strong>Description: </strong></br> {{ item.description }}</p>
   <p><strong>Run As: </strong> {{ item.run_as }}</p>
 

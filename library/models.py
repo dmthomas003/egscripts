@@ -96,9 +96,18 @@ class UserProfile(models.Model):
     saved = models.ManyToManyField('Item')
     is_t1e = models.BooleanField(default=False)
 
+    """
+    def save_item(self, item):
+        self.saved.add(item)
+        self.save()
+
+    def remove_item(self, item):
+        self.saved.remove(item)
+        self.save()
+
     def __str__(self):
         return self.user.get_username()
-
+    """
 
 class KBA(models.Model):
     

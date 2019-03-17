@@ -11,6 +11,16 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User, Group
 
 
+def add_saved(request):
+
+    """
+    view for ajax for save button
+    function to add Item to manytomany relationship
+    for current user's UserProfil
+    """
+    pass
+
+
 @login_required
 def index(request):
 
