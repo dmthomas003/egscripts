@@ -101,3 +101,11 @@ p.code-block {
 }
 
 li {display: block;}
+
+.cat_menu_item {
+    display: inline-block;
+    margin: 2px 5px 2px 5px;
+}
+
+.cat_menu_list {
+    margin: 2px 5px 2px 5px;

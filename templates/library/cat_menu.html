@@ -1,0 +1,10 @@
+<div class="cat_menu">
+  {% if category_list %}
+  <ul class="cat_menu_list">
+    {% for category in category_list %}
+    <li class="cat_menu_item"><a href="#{{ category.name }}"><h5>{{ category.name }}</h5></a></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>
+
