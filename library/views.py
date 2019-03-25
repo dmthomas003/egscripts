@@ -121,11 +121,13 @@ class CategoryListView(LoginRequiredMixin, generic.ListView):
     template_name = 'library/categories.html'
     model = Category
 
+    """
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super(CategoryListView, self).get_context_data(**kwargs)
         context[''] = 
         return context
+    """
 
 
 class CategoryDetailView(LoginRequiredMixin, generic.DetailView):
