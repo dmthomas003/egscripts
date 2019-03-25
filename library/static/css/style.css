@@ -109,3 +109,5 @@ li {display: block;}
 
 .cat_menu_list {
     margin: 2px 5px 2px 5px;
+    padding: 0;
+}
