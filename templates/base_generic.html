@@ -21,13 +21,12 @@
 	<ul>
           <li><strong>User: </strong><a href="{% url 'userprofile-detail' %}">{{ username }}</a></li>
           <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
-	  <li><strong>Join Date: </strong></br> {{ user.date_joined | date:"F d, Y" }}</li>
-	  <li><strong>Last Login: </strong></br> {{ user.last_login | date:"F d, Y" }}</li>
+<!--	  <li><strong>Join Date: </strong></br> {{ user.date_joined | date:"F d, Y" }}</li>
+<li><strong>Last Login: </strong></br> {{ user.last_login | date:"F d, Y" }}</li>-->
         {% if perms.library.can_add_item %}
         {% endif %}
         <ul class="sidebar-nav">
 	  <li><a href="{% url 'categories' %}">By Category</a></li>
-	  <li><a href="{% url 'types' %}">By Type</a></li>
 	</ul>
       {% endif %}
       {% endblock %}

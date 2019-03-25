@@ -14,9 +14,7 @@ from django.contrib.auth.models import User, Group
 def add_saved(request):
 
     """
-    view for ajax for save button
-    function to add Item to manytomany relationship
-    for current user's UserProfil
+    view for ajax for save item button
     """
     pass
 
@@ -25,13 +23,11 @@ def add_saved(request):
 def index(request):
 
     """
-
     eliminate 
 
     should be basic landing page but currently stats page
     the contents of this index function view should be moved
     to the sidebar
-
     """
 
     num_scripts = Item.objects.filter(reviewed=True).count()
@@ -56,13 +52,11 @@ def index(request):
 def userprofile(request):
 
     """
-
     main view for logged in user
 
     includes contribution form if user is a member of 
     contributor group and a list of pending and reviewed
     items
-
     """
 
     username = request.user.get_username()
@@ -73,8 +67,6 @@ def userprofile(request):
             user=request.user
             )
         profile = UserProfile.objects.get(user=request.user)
-    #join_date = request.user.date_joined
-    #last_login = request.user.last_login
     contributions = Item.objects.filter(reviewed=True).filter(contributor=profile.user)
     new_contrib = Item.objects.filter(reviewed=True).filter(contributor=profile.user).order_by('-created')[:10]
     total_contributions = contributions.count()
@@ -110,8 +102,6 @@ def userprofile(request):
             'contribution_form': contribution_form,
             'saved_items': saved_items,
             'saved_count': saved_count,
-            #'join_date': join_date,
-            #'last_login': last_login,
             }
 
     return render(request, 'library/userprofile.html', context=context)
@@ -130,6 +120,12 @@ class ItemDetailView(LoginRequiredMixin, generic.DetailView):
 class CategoryListView(LoginRequiredMixin, generic.ListView):
     template_name = 'library/categories.html'
     model = Category
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super(CategoryListView, self).get_context_data(**kwargs)
+        context[''] = 
+        return context
 
 
 class CategoryDetailView(LoginRequiredMixin, generic.DetailView):
