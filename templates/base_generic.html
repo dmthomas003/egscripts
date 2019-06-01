@@ -24,6 +24,7 @@
 <!--	  <li><strong>Join Date: </strong></br> {{ user.date_joined | date:"F d, Y" }}</li>
 <li><strong>Last Login: </strong></br> {{ user.last_login | date:"F d, Y" }}</li>-->
         {% if perms.library.can_add_item %}
+	{% include "contrib_form.html" %}
         {% endif %}
         <ul class="sidebar-nav">
           <li><a href="{% url 'categories' %}">Categories</a></li>
