@@ -26,7 +26,12 @@
         {% if perms.library.can_add_item %}
         {% endif %}
         <ul class="sidebar-nav">
-	  <li><a href="{% url 'categories' %}">Categories</a></li>
+	  <li>
+   	    <strong>Library</strong>
+	    <ul>
+              <li><a href="{% url 'categories' %}">Categories</a></li>
+	    </ul>
+	  </li>
 	  <li><a href="https://blog.eglamire.com">Blog</a></li>
 	</ul>
       {% endif %}
