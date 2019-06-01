@@ -26,13 +26,8 @@
         {% if perms.library.can_add_item %}
         {% endif %}
         <ul class="sidebar-nav">
-	  <li>
-            <strong><a href="{% url 'userprofile-detail' %}">Library</a></strong>
-	    <ul>
-              <li><a href="{% url 'categories' %}">Categories</a></li>
-	    </ul>
-	  </li>
-	  <li><strong><a href="https://blog.eglamire.com">Blog</a></strong></li>
+          <li><a href="{% url 'categories' %}">Categories</a></li>
+	  <li><a href="https://blog.eglamire.com">Blog</a></li>
 	</ul>
       {% endif %}
       {% endblock %}
