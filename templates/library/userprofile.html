@@ -3,6 +3,7 @@
 {% block content %}
 {% if user.is_authenticated %}
 {% if perms.library.can_add_item %}
+{% include "contrib_form.html" %}
 {% if contributions %}
 <div class="useritem-lists">
   <div  class="contrib-list">

@@ -23,9 +23,6 @@
           <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
 <!--	  <li><strong>Join Date: </strong></br> {{ user.date_joined | date:"F d, Y" }}</li>
 <li><strong>Last Login: </strong></br> {{ user.last_login | date:"F d, Y" }}</li>-->
-        {% if perms.library.can_add_item %}
-	{% include "contrib_form.html" %}
-        {% endif %}
         <ul class="sidebar-nav">
           <li><a href="{% url 'categories' %}">Categories</a></li>
 	  <li><a href="https://blog.eglamire.com">Blog</a></li>
