@@ -62,12 +62,26 @@ p.code-block {
     min-width: 160px;
     overflow: auto;
     z-index: 1;
+    padding: 15px;
+    background-color: #152837;
 }
 
 .dropdown-content a {
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+}
+
+.dropdown-content li {
+    margin: 15px;
+}
+
+#contribsub li {
+    margin: 15px;
+}
+
+.dropdown-content ul {
+    margin: 0px;
 }
 
 .show {display: block;}
