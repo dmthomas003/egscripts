@@ -63,7 +63,9 @@ p.code-block {
     overflow: auto;
     z-index: 1;
     padding: 15px;
-    background-color: #152837;
+    background-color: #36648b;
+    border: 1px solid #cdc5bf;
+    border-radius: 5px;
 }
 
 .dropdown-content a {
