@@ -4,9 +4,10 @@
 {% if user.is_authenticated %}
 {% if perms.library.can_add_item %}
 {% include "contrib_form.html" %}
-{% if contributions %}
+{% endif %}
 <div class="useritem-lists">
   <div  class="contrib-list">
+  {% if contributions %}
   <p><strong>Total Contributions: </strong>  {{ total_contributions }}</p>
   <ul>
   {% for item in new_contrib.all %}
@@ -17,9 +18,9 @@
       </li>
   {% endfor %}
   </ul>
+{% endif %}
   </div>
-{% endif %}
-{% endif %}
+
 <div  class="user-list">
 {% if saved_items %}
 	<p><strong>Saved: </strong> {{ saved_count }}</p>
@@ -31,12 +32,12 @@
        <button onclick="copyToClipboard('#{{ item.pk }}')">copy</button>
       </li>
   {% endfor %}
-{% endif %}
 </ul>
+{% endif %}
 </div>
 
-{% if pending_contributions %}
 <div class="pending-list">
+{% if pending_contributions %}
   <p><strong>Pending Contributions: </strong> {{ pending_count }}</p>
   <ul>
     {% for item in pending_contributions.all %}
@@ -49,6 +50,7 @@
   </ul>
 {% endif %}
 </div>
+
 </div>
 {% endif %}
 
